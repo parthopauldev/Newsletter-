@@ -12,6 +12,7 @@ let loadData = async (showContainer) => {
 };
 // news by categories load 
 let loadNewsByCategories = async (id) => {
+  getElement('news-container').innerText='loading ...'
   let data = await fetch(`https://news-api-fs.vercel.app/api/categories/${id}`);
   let newsDatas = await data.json();
   let allNews=newsDatas.articles;
@@ -80,13 +81,13 @@ navContainer.addEventListener("click", (e) => {
 
 loadNewsByCategories('main')
 // bookmark feature 
-let bookmark=(img,title,time,id)=>{
 let bookmarkContainer=getElement('bookmark');
+let bookmark=(img,title,time,id)=>{
 console.log(id);
 
 
 let allBookmark=bookmarkContainer.children;
-let allId=[22]
+let allId=[]
 for (const element of allBookmark) {
 let id= element.getAttribute('id');
     allId.push(id)
@@ -108,6 +109,7 @@ if (allId.includes(id)) {
     <button onclick="removeBookmark('${id}',)" class="btn">Remove</button>
     `
 }
+bookmarkcount()
 }
 // remove bookmark feature 
 let removeBookmark=id=>{
@@ -115,6 +117,16 @@ let removeBookmark=id=>{
   removeItem.remove()
   console.log('fvfv'+removeItem);
   console.log(id);
-  
+  bookmarkcount()
   
 }
+let bookmarkcount=()=>{
+  
+  let bookmarkItem=bookmarkContainer.children
+  let bookmarkNumber=getElement('bookmark-count') ;
+  bookmarkNumber.innerText=bookmarkItem.length -1;
+  console.log(bookmarkItem.length);
+  
+}
+
+
