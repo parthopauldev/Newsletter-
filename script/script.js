@@ -12,11 +12,20 @@ let loadData = async (showContainer) => {
 };
 // news by categories load 
 let loadNewsByCategories = async (id) => {
-  getElement('news-container').innerText='loading ...'
-  let data = await fetch(`https://news-api-fs.vercel.app/api/categories/${id}`);
-  let newsDatas = await data.json();
-  let allNews=newsDatas.articles;
-  showNewsByCategories(allNews)
+  try {
+  
+    getElement('news-container').innerText='loading ...'
+    let data = await fetch(`https://news-api-fs.vercel.app/api/categories/${id}`);
+    let newsDatas = await data.json();
+    let allNews=newsDatas.articles;
+   
+      showNewsByCategories(allNews)
+      
+   
+} catch (err) {
+ error()
+ alert('wrong')
+} 
 
   
   
@@ -38,8 +47,15 @@ let showData = (useableDatas, showContainer) => {
 firstNavItem.classList.add('active')
 };
 
+let newsContainer=getElement('news-container') ;
 let showNewsByCategories=(allNews)=>{
-    let newsContainer=getElement('news-container') ;
+console.log(allNews);
+
+  if (allNews.length === 0) {
+    showEmtyMessage()
+    return
+  }
+
     newsContainer.innerHTML=' ';
     allNews.forEach(news => {
       
@@ -53,6 +69,7 @@ let showNewsByCategories=(allNews)=>{
 </div>
         `
     });
+
 }
 //get nav containeter 
 let navContainer = getElement("nav-links-box");
@@ -127,6 +144,13 @@ let bookmarkcount=()=>{
   bookmarkNumber.innerText=bookmarkItem.length -1;
   console.log(bookmarkItem.length);
   
+}
+let error=()=>{
+newsContainer.innerText='Something Went Wrong'
+}
+let showEmtyMessage=()=>{
+  newsContainer.innerText='News Not Found'
+
 }
 
 
