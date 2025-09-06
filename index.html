@@ -12,26 +12,30 @@
 <body>
     <!-- header start  -->
     <header class="py-[10px] bg-[red] w-full">
-        <div class="max-w-[1440px]  px-[100px] align-middle sm:px-[30px] mx-auto ">
+        <div class="max-w-[1440px]  px-[100px] align-middle sm:px-[30px] mx-auto text-center sm:text-left ">
             <!-- logo  -->
             <div class="logo text-[40px] font-bold text-[white]"><span class="bg-white text-[red] px-[8px]">N</span>ews 
                 <span class="bg-white text-[red] px-[13px]">L</span>atter</div>
             
         </div>
     </header>
-    <nav id="nav-links-box" class="flex gap-[20px] max-w-[1440px] mx-auto px-[30px] py-[6px]">
+    <nav id="nav-links-box" class="flex flex-wrap gap-[20px] max-w-[1440px] mx-auto px-[30px] py-[6px]">
 
     </nav>
     <main>
+<!-- all news  -->
+    <section  class="max-w-[1440px] flex-col-reverse sm:flex-row mx-auto flex px-[10px] mt-[30px]">
+        <div class="w-full sm:w-3/4">
 
-    <section  class="max-w-[1440px] mx-auto flex px-[10px] mt-[30px]">
-<div id="news-container" class=" w-3/4 grid grid-cols-1 sm:grid-cols-3 gap-y-[40px]">
-
+            <div id="news-container" class="h-auto w-full grid place-items-center grid-cols-[repeat(auto-fit,_minmax(300px,_1fr))] gap-y-[40px]">
+            
+            </div>
+        </div>
+        
+<div id="bookmark" class="bookmark w-full sm:w-1/4 h-auto rounded-tl-[10px] rounded-tr-[10px] mb-[50px] border-b-2 pt-[50px] sm:pt-0 flex flex-col items-center gap-[20px]">
+    <h2 class="font-bold text-[34px] bg-red-500   rounded-tl-[10px] rounded-tr-[10px] text-center sm:w-full w-[80%]">Bookmark</h2>
 </div>
-<div id="bookmark" class="bookmark w-1/4  rounded-tl-[10px] rounded-tr-[10px] flex flex-col items-center gap-[20px]">
-    <h2 class="font-bold text-[34px] bg-red-500   rounded-tl-[10px] rounded-tr-[10px] text-center w-full">Bookmark</h2>
-</div>
-    </section>
+</section>
     </main>
     <script src="script/script.js"></script>
 </body>

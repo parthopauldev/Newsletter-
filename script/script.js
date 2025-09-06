@@ -44,7 +44,7 @@ let showNewsByCategories=(allNews)=>{
       
         
         newsContainer.innerHTML +=`
-        <div class="w-[300px]  p-[20px] pb-[20px] bg-[#efecec]">
+        <div class="w-[300px] h-[350px] p-[20px] pb-[20px] bg-[#efecec]">
     <img class='w-full h-[150px] mb-[10px]' src="${news.image.srcset[1].url}" alt="">
     <h2 class=' font-bold mb-[10px] '>${news.title}</h2>
     <h2 class=' mb-[10px] '>${news.time}</h2>
@@ -82,13 +82,15 @@ loadNewsByCategories('main')
 // bookmark feature 
 let bookmark=(img,title,time,id)=>{
 let bookmarkContainer=getElement('bookmark');
+console.log(id);
 
 
 let allBookmark=bookmarkContainer.children;
-let allId=[]
+let allId=[22]
 for (const element of allBookmark) {
 let id= element.getAttribute('id');
     allId.push(id)
+
 }
 console.log(allId);
 if (allId.includes(id)) {
@@ -103,7 +105,16 @@ if (allId.includes(id)) {
     <img class='w-full h-[150px] mb-[10px]' src="${img}" alt="">
     <h2 class=' font-bold mb-[10px] '>${title}</h2>
     <h2 class=' mb-[10px] '>${time}</h2>
+    <button onclick="removeBookmark('${id}',)" class="btn">Remove</button>
     `
-    
 }
+}
+// remove bookmark feature 
+let removeBookmark=id=>{
+  let removeItem=getElement(id) ;
+  removeItem.remove()
+  console.log('fvfv'+removeItem);
+  console.log(id);
+  
+  
 }
