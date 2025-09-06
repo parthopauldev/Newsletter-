@@ -32,6 +32,36 @@ let loadNewsByCategories = async (id) => {
   
 
 };
+
+// news details load function 
+let viewDetails=async(id)=>{
+let data=await fetch(`https://news-api-fs.vercel.app/api/news/${id}`)
+let Details=await data.json();
+let allDetails=Details.article
+
+showNewsDetails(allDetails)
+
+}
+// showNewsDetails feature 
+let showNewsDetails=(news)=>{
+  console.log(news);
+  
+  let modulContainer=getElement('my_modal_5') ;
+  modulContainer.innerHTML=` <div class="modal-box">
+  <h3 class="text-[24px] mb-[20px] font-bold">${news.title}</h3>
+   <img class='w-full h-[150px] mb-[10px]' src="${news.images[1].url}" alt="">
+  <h3 class=" ">${news.content}</h3>
+  
+    <div class="modal-action">
+     
+         <form method="dialog">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </form>
+    </div>
+  </div>`
+  modulContainer.showModal()
+}
 // nav item show feature
 let showData = (useableDatas, showContainer) => {
   showContainer.innerHTML = " ";
@@ -61,12 +91,17 @@ console.log(allNews);
       
         
         newsContainer.innerHTML +=`
-        <div class="w-[300px] h-[350px] p-[20px] pb-[20px] bg-[#efecec]">
+        <div class="w-[300px] min-h-[350px] p-[20px] pb-[20px] bg-[#efecec]">
     <img class='w-full h-[150px] mb-[10px]' src="${news.image.srcset[1].url}" alt="">
     <h2 class=' font-bold mb-[10px] '>${news.title}</h2>
     <h2 class=' mb-[10px] '>${news.time}</h2>
-<button  onclick="bookmark('${news.image.srcset[1].url}','${news.title}','${news.time}','${news.id}',)" class="btn">Bookmark</button>
+    <div class ='flex justify-between'>
+    <button  class ='mb-[10px] btn' onclick="bookmark('${news.image.srcset[1].url}','${news.title}','${news.time}','${news.id}',)">Bookmark</button>
+    <button onclick="viewDetails('${news.id}')" class ='mb-[10px] btn'>View Details</button>
+    </div>
+
 </div>
+
         `
     });
 
@@ -123,7 +158,11 @@ if (allId.includes(id)) {
     <img class='w-full h-[150px] mb-[10px]' src="${img}" alt="">
     <h2 class=' font-bold mb-[10px] '>${title}</h2>
     <h2 class=' mb-[10px] '>${time}</h2>
+     <div class ='flex justify-between'>
     <button onclick="removeBookmark('${id}',)" class="btn">Remove</button>
+    <button onclick="viewDetails('${id}')" class ='mb-[10px] btn'>View Details</button>
+     </div>
+      </div>
     `
 }
 bookmarkcount()
