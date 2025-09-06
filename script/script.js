@@ -1,5 +1,6 @@
 let getElement = (id) => document.getElementById(id);
 
+
 // nav categories load 
 let loadData = async (showContainer) => {
   let data = await fetch('https://news-api-fs.vercel.app/api/categories');
@@ -45,9 +46,9 @@ let showNewsByCategories=(allNews)=>{
         newsContainer.innerHTML +=`
         <div class="w-[300px]  p-[20px] pb-[20px] bg-[#efecec]">
     <img class='w-full h-[150px] mb-[10px]' src="${news.image.srcset[1].url}" alt="">
-    <h2 class=' font-bold mb-[15px] '>${news.title}</h2>
-    <h2 class='  '>${news.time}</h2>
-
+    <h2 class=' font-bold mb-[10px] '>${news.title}</h2>
+    <h2 class=' mb-[10px] '>${news.time}</h2>
+<button  onclick="bookmark('${news.image.srcset[1].url}','${news.title}','${news.time}','${news.id}',)" class="btn">Bookmark</button>
 </div>
         `
     });
@@ -76,7 +77,33 @@ navContainer.addEventListener("click", (e) => {
     e.target.classList.add("active");
   }
 });
-// first show main categories articles
+
 loadNewsByCategories('main')
+// bookmark feature 
+let bookmark=(img,title,time,id)=>{
+let bookmarkContainer=getElement('bookmark');
 
 
+let allBookmark=bookmarkContainer.children;
+let allId=[]
+for (const element of allBookmark) {
+let id= element.getAttribute('id');
+    allId.push(id)
+}
+console.log(allId);
+if (allId.includes(id)) {
+    
+   
+}else{
+    
+    
+    bookmarkContainer.innerHTML +=`
+    
+    <div id='${id}' class="w-[300px]  p-[20px] pb-[20px] bg-[#efecec]">
+    <img class='w-full h-[150px] mb-[10px]' src="${img}" alt="">
+    <h2 class=' font-bold mb-[10px] '>${title}</h2>
+    <h2 class=' mb-[10px] '>${time}</h2>
+    `
+    
+}
+}
